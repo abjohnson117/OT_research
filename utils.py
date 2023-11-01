@@ -61,6 +61,9 @@ def get_unique(row_ind_list):
     return result_lists
 
 def sim_OT(m,n,it):
+    """
+    Function that will perform our simulations
+    """
     possible_m = list(range((int(m / gcd(n,m)))+1))
     possible_n = list(range((int(n / gcd(n,m)))+1))
     m_array = np.zeros((it,len(possible_m)))
@@ -84,3 +87,23 @@ def sim_OT(m,n,it):
             n_array[i,col_1] = len(col)/m
 
     return m_array, n_array, possible_m, possible_n
+
+def plot_func(avg_m_statistics,avg_n_statistics,possible_m,possible_n):
+    """
+    Will collect data and provide our plots
+    """
+    ins = np.where(avg_m_statistics > 1e-10)
+    plt.bar(np.array(possible_m)[ins],avg_m_statistics[ins])
+    plt.xticks(np.array(possible_m)[ins])
+    plt.title("Distribution of source balls: " + str(len(avg_m_statistics)-1) + " matched to target balls")
+    plt.ylabel("Average frequency")
+    plt.xlabel("Outgoing edges from each source ball")
+    plt.show()
+
+    ins = np.where(avg_n_statistics > 1e-10)
+    plt.bar(np.array(possible_n)[ins],avg_n_statistics[ins])
+    plt.xticks(np.array(possible_n)[ins])
+    plt.title("Distribution of target balls: "+ str(len(avg_n_statistics)-1) +" receiving mass from source balls")
+    plt.ylabel("Average frequency")
+    plt.xlabel("Incoming edges from each target ball")
+    plt.show()
