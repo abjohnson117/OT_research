@@ -8,12 +8,12 @@ import ot.plot
 import matplotlib.pylab as pl
 from tqdm import tqdm 
 
-def OT_solver(P,Q,m,n,fig_1=True,fig_3=True,fig_4=True):
+def OT_solver(P,Q,m,n,p=1,fig_1=True,fig_3=True,fig_4=True):
     """
     Using Python OT solver:
     https://pythonot.github.io/auto_examples/plot_OT_2D_samples.html#sphx-glr-auto-examples-plot-ot-2d-samples-py
     """
-    M = ot.dist(P,Q,p=1)
+    M = ot.dist(P,Q,p=p)
     a,b = np.ones((n,)) / n, np.ones((m,)) / m
     
     if fig_1:
