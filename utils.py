@@ -6,13 +6,14 @@ import matplotlib.pyplot as plt
 import ot
 import ot.plot
 import matplotlib.pylab as pl
+from tqdm import tqdm 
 
 def OT_solver(P,Q,m,n,fig_1=True,fig_3=True,fig_4=True):
     """
     Using Python OT solver:
     https://pythonot.github.io/auto_examples/plot_OT_2D_samples.html#sphx-glr-auto-examples-plot-ot-2d-samples-py
     """
-    M = ot.dist(P,Q, p=1)
+    M = ot.dist(P,Q,p=1)
     a,b = np.ones((n,)) / n, np.ones((m,)) / m
     
     if fig_1:
@@ -68,7 +69,7 @@ def sim_OT(m,n,it):
     possible_n = list(range((int(n / gcd(n,m)))+1))
     m_array = np.zeros((it,len(possible_m)))
     n_array = np.zeros((it,len(possible_n)))
-    for i in range(200):
+    for i in tqdm(range(200)):
         P = np.random.rand(n, 2)
         Q = np.random.rand(m, 2)
 
