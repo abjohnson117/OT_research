@@ -8,7 +8,7 @@ import ot.plot
 import matplotlib.pylab as pl
 from tqdm import tqdm 
 
-def OT_solver(P,Q,m,n,p=1,fig_1=True,fig_3=True,fig_4=True):
+def OT_solver(P,Q,m,n,p=1,fig_1=True,fig_3=True,fig_4=True,random=False):
     """
     Using Python OT solver:
     https://pythonot.github.io/auto_examples/plot_OT_2D_samples.html#sphx-glr-auto-examples-plot-ot-2d-samples-py
@@ -39,6 +39,8 @@ def OT_solver(P,Q,m,n,p=1,fig_1=True,fig_3=True,fig_4=True):
         pl.plot(Q[:, 0], Q[:, 1], 'xr', label='Target samples')
         pl.legend(loc=0)
         pl.title('OT matrix with samples')
+    if random:
+        G0 = np.random.uniform(size=(n,m))
 
     return G0
 
@@ -61,7 +63,7 @@ def get_unique(row_ind_list):
     result_lists = list(element_lists.values())
     return result_lists
 
-def sim_OT(m,n,it):
+def sim_OT(m,n,it,random=False):
     """
     Function that will perform our simulations
     """
@@ -73,8 +75,9 @@ def sim_OT(m,n,it):
         P = np.random.rand(n, 2)
         Q = np.random.rand(m, 2)
 
-        G0 = OT_solver(P,Q,m,n,fig_1=False,fig_3=False,fig_4=False)
+        G0 = OT_solver(P,Q,m,n,fig_1=False,fig_3=False,fig_4=False,random=random)
         G0 = np.where(G0 < 1e-10, 0, G0)
+        print(G0.shape)
         row_ind_list = [np.count_nonzero(G0[arr]) for arr in range(len(G0))]
         col_ind_list = [np.count_nonzero((G0.T)[arr]) for arr in range(len((G0.T)))]
         unique_row, unique_col = get_unique(row_ind_list), get_unique(col_ind_list)
@@ -87,7 +90,7 @@ def sim_OT(m,n,it):
             col_1 = col[0]
             n_array[i,col_1] = len(col)/m
 
-    return m_array, n_array, possible_m, possible_n
+    return m_array, n_array, possible_m, possible_n, G0
 
 def plot_func(avg_m_statistics,avg_n_statistics,possible_m,possible_n):
     """
