@@ -77,7 +77,7 @@ def sim_OT(m,n,it,random=False):
 
         G0 = OT_solver(P,Q,m,n,fig_1=False,fig_3=False,fig_4=False,random=random)
         G0 = np.where(G0 < 1e-10, 0, G0)
-        print(G0.shape)
+        # print(G0.shape)
         row_ind_list = [np.count_nonzero(G0[arr]) for arr in range(len(G0))]
         col_ind_list = [np.count_nonzero((G0.T)[arr]) for arr in range(len((G0.T)))]
         unique_row, unique_col = get_unique(row_ind_list), get_unique(col_ind_list)
@@ -90,24 +90,28 @@ def sim_OT(m,n,it,random=False):
             col_1 = col[0]
             n_array[i,col_1] = len(col)/m
 
-    return m_array, n_array, possible_m, possible_n, G0
+    return m_array, n_array, possible_m, possible_n
 
-def plot_func(avg_m_statistics,avg_n_statistics,possible_m,possible_n):
+def plot_func(avg_m_statistics,avg_n_statistics,possible_m,possible_n,receive=True,save=False):
     """
     Will collect data and provide our plots
     """
     ins = np.where(avg_m_statistics > 1e-10)
     plt.bar(np.array(possible_m)[ins],avg_m_statistics[ins])
     plt.xticks(np.array(possible_m)[ins])
-    plt.title("Distribution of source balls: " + str(len(avg_m_statistics)-1) + " matched to target balls")
+    plt.title("Distribution of source balls: " + str(len(avg_n_statistics)-1) + " matched to " + str(len(avg_m_statistics)-1) + " target balls")
     plt.ylabel("Average frequency")
     plt.xlabel("Outgoing edges from each source ball")
     plt.show()
 
-    ins = np.where(avg_n_statistics > 1e-10)
-    plt.bar(np.array(possible_n)[ins],avg_n_statistics[ins])
-    plt.xticks(np.array(possible_n)[ins])
-    plt.title("Distribution of target balls: "+ str(len(avg_n_statistics)-1) +" receiving mass from source balls")
-    plt.ylabel("Average frequency")
-    plt.xlabel("Incoming edges from each target ball")
-    plt.show()
+    if receive:
+        ins = np.where(avg_n_statistics > 1e-10)
+        plt.bar(np.array(possible_n)[ins],avg_n_statistics[ins])
+        plt.xticks(np.array(possible_n)[ins])
+        plt.title("Distribution of target balls: "+ str(len(avg_m_statistics)-1) + " receiving mass from "+ str(len(avg_n_statistics)-1) +" source balls")
+        plt.ylabel("Average frequency")
+        plt.xlabel("Incoming edges from each target ball")
+        plt.show()
+
+    if save:
+        plt.savefig("/Users/Johnson/Documents/Stefan_Research/Writeup/images/"+str(len(avg_n_statistics)-1) +str(len(avg_m_statistics)-1) + ".png")
