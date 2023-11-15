@@ -112,6 +112,3 @@ def plot_func(avg_m_statistics,avg_n_statistics,possible_m,possible_n,receive=Tr
         plt.ylabel("Average frequency")
         plt.xlabel("Incoming edges from each target ball")
         plt.show()
-
-    if save:
-        plt.savefig("/Users/Johnson/Documents/Stefan_Research/Writeup/images/"+str(len(avg_n_statistics)-1) +str(len(avg_m_statistics)-1) + ".png")

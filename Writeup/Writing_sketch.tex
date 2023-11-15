@@ -3,12 +3,12 @@
 \usepackage{wasysym}
 \usepackage{graphicx}
 % \usepackage[poorman]{cleveref}
-\usepackage{hyperref}
+% \usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{stackengine}
 \usepackage[english]{babel}
 \def\stackalignment{l}
-% \usepackage[colorlinks]{hyperref}
+\usepackage[colorlinks]{hyperref}
 \usepackage{tikz}
 \usepackage[export]{adjustbox}
 \usepackage{commands}
@@ -55,13 +55,25 @@ to motivate the problem of optimally transporting the mass from $X$ to $Y$. The 
 \end{theorem}
 In building off of this work and this theorem, we investigate the problem of knowing the distributions of the number of different points moved from $X$ to $Y$, and vice-versa, as $\frac{n}{\mathrm{gcd}(m,n)}$ and $\frac{m}{\mathrm{gcd}(m,n)}$ may be large. As an example, if $m=20$ and $n=30$, then we know that each point in $X$ is mapped to at most 3 points in $Y$, and each point in $Y$ receives mass from at most $2$ points in $X$. Yet, we seek to understand the frequency with which a point in $X$ is mapped to at most 3 points in $Y$, for instance. On simple intuition, we know that this exact scenario shouldn't happen which relatively high frequency, since points will optimally be matched to those points closest to them (on average). We investigate this question both numerically and theoretically. Specifically numerically, we look at specific interesting cases, such as when $m,n$ are two (relatively) large, coprime numbers, and when $m,n$ are again coprime but with large distance from each other. To our surprise, we found that the distribution of points tends to have small support, consistently grouping across a small number of points that are always close together.
 
-Let's take a look at a couple more in-depth examples of what was motivated above. First, let's look at the distribution created by matching $m=57$ points in $X$ to $n=79$ points in $Y$. Note, clearly, $m,n$ are coprime. This distribution is shown in \ref{fig: A}.
 \begin{figure}
   \centering
   \hspace*{0cm}\includegraphics[width=1\textwidth,height=\textwidth,keepaspectratio]{images/57-79.png}
   \caption{}
   \label{fig: A}
 \end{figure}
+
+Let's take a look at a couple more in-depth examples of what was motivated above. First, let's look at the distribution created by matching $m=57$ points in $X$ to $n=79$ points in $Y$. We run a simulation of 200 trials and average the results. Note, clearly, $m,n$ are coprime. The resulting distribution is shown in \eqref{fig: A}. Note that out of a maximum of 79 possible matchings, each point in $X$ only matches to 2, 3, 4, and 5 (with very low probability). 
+
+We now look at the case where $m=7$ and $n=2000$ to observe what happens when the distance between coprime integers becomes larger. We show the results in \eqref{fig: B}. Note that while the number of possible matchings must necessarily increase, the distribution of matchings from the source distribution to the target distribution is still sparse.
+
+\begin{figure}
+  \centering
+  \hspace*{0cm}\includegraphics[width=1\textwidth,height=\textwidth,keepaspectratio]{images/7-2000.png}
+  \caption{}
+  \label{fig: B}
+\end{figure}
+
+We seek to explain this behaviour theoretically. To see this, first we show that
 
 % \section{Theoretical Background}
 
