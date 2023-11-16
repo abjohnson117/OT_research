@@ -417,3 +417,4 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb

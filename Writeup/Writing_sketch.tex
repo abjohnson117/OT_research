@@ -21,6 +21,7 @@
 \theoremstyle{plain}
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
 
 \definecolor{red}{rgb}{0.8500, 0.3250, 0.0980}
 \definecolor{green}{rgb}{0.4660, 0.6740, 0.1880}
@@ -73,8 +74,21 @@ We now look at the case where $m=7$ and $n=2000$ to observe what happens when th
   \label{fig: B}
 \end{figure}
 
-We seek to explain this behaviour theoretically. To see this, first we show that
-
+We seek to explain this behaviour theoretically. To see this, first we give a result on the transportation cost between $n$ random and $m$ points drawn from the same distribution but that are of different number.
+\begin{proposition}
+  Given $m$ points in $X$ and $n$ points in $Y$, with $m \neq n$, and $\mu$ and $\nu$ as defined in \ref{eq:empmeas}, then the transportation cost associated with transporting mass $\mu$ to $\nu$ is (not necessarily sharply) of the order
+  \[
+    \sqrt{m\log m} + \sqrt{n\log n}.
+  \]
+\end{proposition}
+\begin{proof}[Proof sketch.]
+  We use the triangle inequality property of Wasserstein distances to show this bound, along with the result from \textit{On Optimal Matchings}. Let $\zeta_x$ be the flat measure on $X$ and $\zeta_y$ be the flat measure on $Y$. It then follows that
+  \begin{align*}
+    W_p (\mu, \nu) \leq W_p (\mu) &\leq W_p (\mu, \zeta_x) + W_p (\nu, \zeta_y)\\
+    &\lesssim \sqrt{m\log m} + \sqrt{n\log n}.
+  \end{align*}
+\end{proof}
+From here, we are looking at relations to the distance of the nearest neighbors and other phenomena in forbidden subgraphs to see if there is such an explanation of the sparse distributions.
 % \section{Theoretical Background}
 
 
