@@ -35,8 +35,8 @@ def OT_solver(P,Q,m,n,p=1,fig_1=True,fig_3=True,fig_4=True,random=False):
     if fig_4:
         pl.figure(4)
         ot.plot.plot2D_samples_mat(P, Q, G0, c=[.5, .5, 1])
-        pl.plot(P[:, 0], P[:, 1], '+b', label='Source samples')
-        pl.plot(Q[:, 0], Q[:, 1], 'xr', label='Target samples')
+        pl.plot(P[:, 0], P[:, 1], '+b', label='Target samples')
+        pl.plot(Q[:, 0], Q[:, 1], 'xr', label='Source samples')
         pl.legend(loc=0)
         pl.title('OT matrix with samples')
     if random:
